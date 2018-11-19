@@ -1,3 +1,33 @@
-<p>
-  member-join works!
-</p>
+<section class="inline-center content-margin">
+  <h1>Join</h1>
+  <form>
+    <div class="content-margin">
+      <input type="text" class="text text-lg" placeholder="ID" />
+    </div>
+    <div class="content-margin">
+      <input type="password" class="text text-lg" placeholder="PASSWORD" />
+    </div>
+    <div class="content-margin">
+      <input type="password" class="text text-lg" placeholder="PASSWORD CONFIRM" />
+    </div>
+    <div class="content-margin">
+      <input type="text" class="text text-lg" placeholder="NICKNAME" />
+    </div>
+    <div class="content-margin">
+      <label>BIRTH </label>
+      <input class="text text-nm" type="date">
+    </div>
+    <div class="content-margin">
+      <label>PROFILE PICTURE </label>
+      <input type="file" class="hidden" (change)="onFileChange($event)">
+      <button type="button" (click)="openFileBrowser($event)" class="button button-lg">SELECT</button>
+    </div>
+    <div>
+      <img [src]="url" height="200">
+    </div>
+    <div class="content-margin button-group">
+      <button type="submit" class="button button-lg">SUBMIT</button>
+      <button type="button" class="button button-lg" (click)="back()">CANCEL</button>
+    </div>
+  </form>
+</section>

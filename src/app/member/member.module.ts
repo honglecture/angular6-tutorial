@@ -6,6 +6,7 @@ import { MemberRoutingModule } from './member-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { MemberProfileComponent } from './member-profile/member-profile.component';
 import { MemberJoinComponent } from './member-join/member-join.component';
+import { MemberService } from './services/member.service';
 
 @NgModule({
   declarations: [MemberComponent, MemberLoginComponent,  MemberProfileComponent, MemberJoinComponent],
@@ -15,6 +16,7 @@ import { MemberJoinComponent } from './member-join/member-join.component';
 
     /*custom module */
     SharedModule
-  ]
+  ],
+  providers: [MemberService]
 })
 export class MemberModule { }

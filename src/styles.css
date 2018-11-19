@@ -48,6 +48,10 @@ body {
     font-size: 13px;
 }
 
+.font-lg{
+    font-size: 17px;
+}
+
 .bold{
     font-weight: 700;
 }
@@ -97,6 +101,13 @@ a:hover{
     padding: 0px 10px;
 }
 
+.text.text-nm{
+    height: 40px;
+    width: 300px;
+    border-radius: 15px;
+    padding: 0px 10px;
+}
+
 .text:hover{
     border: none;
     background-color: #e8eaed;
@@ -129,4 +140,12 @@ a:hover{
 .border-box{
     border: 1px solid black;
     padding: 12px 20px;
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+.button-group button{
+    margin : 0px 10px;
 }
