@@ -7,13 +7,15 @@ import { SharedModule } from '../shared/shared.module';
 import { MemberProfileComponent } from './member-profile/member-profile.component';
 import { MemberJoinComponent } from './member-join/member-join.component';
 import { MemberService } from './services/member.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [MemberComponent, MemberLoginComponent,  MemberProfileComponent, MemberJoinComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MemberRoutingModule,
-
     /*custom module */
     SharedModule
   ],

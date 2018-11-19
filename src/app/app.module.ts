@@ -7,21 +7,18 @@ import { MainModule } from './main/main.module';
 import { MemberModule } from './member/member.module';
 import { BoardModule } from './board/board.module';
 import { HttpClientModule } from '@angular/common/http'
-import { FormsModule } from '@angular/forms';
-import { FileSelectDirective } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    FileSelectDirective
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
-    FormsModule,
-
+    // FormsModule,
+    // ReactiveFormsModule,
     /* custom module */
+    AppRoutingModule,
     CoreModule,
     MainModule,
     MemberModule,

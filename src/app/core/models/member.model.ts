@@ -8,6 +8,7 @@ export class Member {
     private picture:string;
     private regDate:Date;
 
+
     get Id(): string {
         return this.id;
     }
