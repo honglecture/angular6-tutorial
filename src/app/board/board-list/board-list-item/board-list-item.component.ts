@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Board } from 'src/app/core/models/board.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board-list-item',
@@ -7,13 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardListItemComponent implements OnInit {
 
-  constructor() { }
+  @Input() board: Board;
+
+  constructor(private router:Router) { }
 
   ngOnInit() {
+    
   }
 
-  test(){
-    console.log('fdsfs');
+  detail(){
+    this.router.navigate([`/board/detail/${this.board['id']}`]);
   }
+
 
 }

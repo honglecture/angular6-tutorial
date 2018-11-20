@@ -9,12 +9,16 @@ import { BoardRoutingModule } from './board-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { BoardService } from './services/board.service';
 import { BoardListItemComponent } from './board-list/board-list-item/board-list-item.component';
+import { NgxEditorModule } from 'ngx-editor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [BoardComponent, BoardListComponent, BoardDetailComponent, BoardRegComponent, BoardUpdateComponent, BoardListItemComponent],
   imports: [
     CommonModule,
-
+    NgxEditorModule,
+    FormsModule,
+    ReactiveFormsModule,
     /* custom module */
     BoardRoutingModule,
     SharedModule

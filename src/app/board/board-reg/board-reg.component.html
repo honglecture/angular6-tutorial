@@ -1,13 +1,18 @@
 <section class="content-margin">
   <h1>Board Reg</h1>
-  <div class="content-margin">
-    <input type="text" class="text text-lg" placeholder="TITLE" />
-  </div>
-  <div class="content-margin">
-    <textarea>여기에 플러그인 쓸꺼</textarea>
-  </div>
-  <div class="content-margin button-group inline-center">
-    <button type="submit" class="button button-lg">Reg</button>
-    <button type="button" class="button button-lg">Back</button>
-  </div>
+  <!-- <form (ngSubmit)="onSubmit()" novalidate> -->
+    <div class="content-margin">
+      <input name="title" type="text" class="text text-lg" placeholder="TITLE" [(ngModel)]="title" />
+    </div>
+    <div class="content-margin">
+      <app-ngx-editor height="300px" [spellcheck]="true" [(ngModel)]="htmlContent"></app-ngx-editor>
+    </div>
+    <div class="content-margin button-group inline-center">
+      <button type="button" class="button button-lg" (click)="onSubmit()">Reg</button>
+      <button type="button" class="button button-lg">Back</button>
+    </div>
+  <!-- </form> -->
+  <pre>
+    {{htmlContent}}
+  </pre>
 </section>

@@ -7,6 +7,7 @@ import { MainModule } from './main/main.module';
 import { MemberModule } from './member/member.module';
 import { BoardModule } from './board/board.module';
 import { HttpClientModule } from '@angular/common/http'
+import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
   declarations: [

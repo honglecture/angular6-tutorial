@@ -2,10 +2,19 @@
 <main id="main" class="content-container">
   <section>
     <h1>main</h1>
+    <div *ngIf="authCheck(); then thenBlock else elseBlock"></div>
     <ul>
-      <li><a routerLink="/member">go to member</a></li>
+      <ng-template #thenBlock>
+        <li><a routerLink="/member/profile">go to profile</a></li>
+      </ng-template>
+      <ng-template #elseBlock>
+        <li><a routerLink="/member/login">go to login</a></li>
+      </ng-template>
       <li><a routerLink="/board">go to board</a></li>
     </ul>
   </section>
 </main>
+<div>
+  <pre>{{id}}</pre>
+</div>
 <app-footer></app-footer>

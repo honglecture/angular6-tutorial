@@ -1,5 +1,6 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import '../node_modules/font-awesome/css/font-awesome';
 /*-- reset --*/
 
 *{
@@ -148,4 +149,8 @@ a:hover{
 
 .button-group button{
     margin : 0px 10px;
+}
+
+.alert{
+    color: #ff0000;
 }

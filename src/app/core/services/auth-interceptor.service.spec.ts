@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UploadFileService } from './upload-file.service';
+import { AuthInterceptor } from './auth-interceptor.service';
 
-describe('UploadFileService', () => {
+describe('AuthInterceptorService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: UploadFileService = TestBed.get(UploadFileService);
+    const service: AuthInterceptor = TestBed.get(AuthInterceptor);
     expect(service).toBeTruthy();
   });
 });

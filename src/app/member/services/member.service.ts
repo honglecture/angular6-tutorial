@@ -25,4 +25,9 @@ export class MemberService {
     .pipe(shareReplay(),catchError(error=>throwError(error)));
   }
 
+  getMember(id:string):Observable<Member>{
+    return this.http.get<Member>(`${this.appUrl}/member/${id}`)
+    .pipe(shareReplay(),catchError(error=>throwError(error)));
+  }
+
 }

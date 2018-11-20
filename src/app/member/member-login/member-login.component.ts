@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MemberService } from '../services/member.service';
+import { Router } from '@angular/router';
+import { Member } from 'src/app/core/models/member.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-member-login',
@@ -7,9 +12,48 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MemberLoginComponent implements OnInit {
 
-  constructor() { }
+  loginForm:FormGroup;
+  message:any;
 
-  ngOnInit() {
-  }
+  constructor(    
+    private formBuilder: FormBuilder,
+    private authService:AuthService,
+    private router: Router) { }
+
+    ngOnInit() {
+      this.buildForm();
+    }
+  
+    buildForm(){
+      this.loginForm = this.formBuilder.group({
+        id: ['', [
+          Validators.required
+        ]],
+        password: ['', [
+          Validators.required
+        ]],
+      });
+    }
+
+    get id() {
+      return this.loginForm.get('id');
+    }
+  
+    get password() {
+      return this.loginForm.get('password');
+    }
+
+    onSubmit(){
+      let member: Member = new Member();
+      member['id'] = this.loginForm.get('id').value;
+      member['password'] = this.loginForm.get('password').value;
+      this.authService.login(member).subscribe(
+        ()=> this.router.navigate(['']),
+        result=>{
+          this.message = result.error;
+        }
+      );
+      
+    }
 
 }

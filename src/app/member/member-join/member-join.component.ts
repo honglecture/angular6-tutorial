@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { Member } from 'src/app/core/models/member.model';
 import { MemberService } from '../services/member.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PasswordValidator } from '../validators/MemberPasswordValidator';
-import { tap } from 'rxjs/operators';
+import { CustomValidator } from 'src/app/shared/validators/custom-validator';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-member-join',
@@ -14,11 +14,13 @@ import { tap } from 'rxjs/operators';
 export class MemberJoinComponent implements OnInit {
 
   memberForm:FormGroup;
-  member:Member;
-  uploadFile:File;
+  //uploadFile:File;
   url:string = '';
 
-  constructor(private formBuilder: FormBuilder ,private location: Location, private memberService:MemberService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private memberService:MemberService,
+    private router: Router) { }
 
   ngOnInit() {
     this.buildMemberForm();
@@ -33,7 +35,7 @@ export class MemberJoinComponent implements OnInit {
       passwordGroup: this.formBuilder.group({
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required]
-      }, {Validators: PasswordValidator.match}),
+      }, {validator: CustomValidator.passwordMatch}),
       email: ['', [
         Validators.required
       ]],
@@ -41,6 +43,9 @@ export class MemberJoinComponent implements OnInit {
         Validators.required
       ]],
       birth: ['', [
+        Validators.required
+      ]],
+      picture: ['', [
         Validators.required
       ]],
     });
@@ -53,14 +58,28 @@ export class MemberJoinComponent implements OnInit {
   }
 
   onFileChange(event:any){
-    if(event.target.files && event.target.files[0]){
-      let reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      reader.onload = (event) =>{
-        this.url = event.target['result']
-      }
-      this.uploadFile = event.target.files[0];
+    if(!event.target.files || !event.target.files[0])
+      return;
+    const file = event.target.files[0];
+
+    if(file.type.indexOf("image/") < 0){
+      alert("이미지가 아닙니다.");
+      return;
     }
+
+    if(file.size > 1024*1024*5){
+      alert("죄송합니다. 5MB를 초과할 수 없습니다.")
+      return;
+    }
+
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (evt) =>{
+      this.url = reader.result.toString();
+    }
+    this.memberForm.patchValue({
+      picture: file
+    });
   }
 
   get id() {
@@ -90,10 +109,13 @@ export class MemberJoinComponent implements OnInit {
   get birth() {
     return this.memberForm.get('birth');
   }
+  get picture() {
+    return this.memberForm.get('picture');
+  }
 
   onSubmit(){
     const formdata: FormData = new FormData();
-    formdata.append('img', this.uploadFile);
+    formdata.append('img', this.memberForm.get('picture').value);
     this.memberService.picktureUpload(formdata).subscribe(
       res=>{
         let member: Member = new Member();
@@ -105,7 +127,9 @@ export class MemberJoinComponent implements OnInit {
         member['picture'] = res.url
         this.memberService.join(member).subscribe(
           result=>{
-            console.log(result);
+            if(result.success){
+              this.back();
+            }
           }
         )
       }
@@ -113,7 +137,7 @@ export class MemberJoinComponent implements OnInit {
   }
 
   back(){
-    this.location.back();
+    this.router.navigate(['/member/login']);
   }
 
 }

@@ -1,4 +1,7 @@
 <section class="content-margin">
   <h1>Board List</h1>
-  <app-board-list-item></app-board-list-item>
+  <app-board-list-item *ngFor="let board of boards" [board]="board"></app-board-list-item>
+  <div class="content-margin">
+    <button type="button" class="button button-lg" routerLink="../reg">글쓰기</button>
+  </div>
 </section>

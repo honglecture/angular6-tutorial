@@ -1,31 +1,65 @@
+<!--
+  1. valid 컴포넌트
+  2. file 선택 alert => valid
+  3. id 중복검사
+  4. email 중복검사 및 인증
+  5. ......
+-->
 <section class="inline-center content-margin">
   <h1>Join</h1>
   <form [formGroup]="memberForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="content-margin">
       <input type="text" name="id" class="text text-lg" placeholder="ID" formControlName="id" />
+      <div *ngIf="id.errors?.required && id.touched" class="alert">
+        ID를 입력하세요!
+      </div>
+      <div *ngIf="id.errors?.pattern && id.touched" class="alert">
+        ID는 영문 또는 숫자로 4자리 이상 10이하로 입력하세요!
+      </div>
     </div>
     <div formGroupName="passwordGroup">
       <div class="content-margin">
         <input name="password" type="password" class="text text-lg" placeholder="PASSWORD" formControlName="password" />
+        <div *ngIf="password.errors?.required && password.touched" class="alert">
+          PASSWORD를 입력하세요!
+        </div>
       </div>
       <div class="content-margin">
         <input name="confirmPassword" type="password" class="text text-lg" placeholder="CONFIRM PASSWORD" formControlName="confirmPassword" />
+        <div *ngIf="confirmPassword.errors?.required && confirmPassword.touched" class="alert">
+          PASSWORD를 입력하세요!
+        </div>
+        <div *ngIf="passwordGroup.errors?.passwordMatch && confirmPassword.touched && !confirmPassword.errors?.required" class="alert">
+          PASSWORD가 일치하지 않습니다!
+        </div>
       </div>
     </div>
     <div class="content-margin">
       <input name="email" type="text" class="text text-lg" placeholder="EMAIL" formControlName="email" />
+      <div *ngIf="email.errors?.required && email.touched" class="alert">
+        EMAIL를 입력하세요!
+      </div>
     </div>
     <div class="content-margin">
       <input name="nickname" type="text" class="text text-lg" placeholder="NICKNAME" formControlName="nickname" />
+      <div *ngIf="nickname.errors?.required && nickname.touched" class="alert">
+        NICKNAME를 입력하세요!
+      </div>
     </div>
     <div class="content-margin">
       <label>BIRTH </label>
       <input name="birth" class="text text-nm" type="date" formControlName="birth">
+      <div *ngIf="birth.errors?.required && birth.touched" class="alert">
+        BIRTH를 입력하세요!
+      </div>
     </div>
     <div class="content-margin">
       <label>PROFILE PICTURE </label>
-      <input name="pictrue" type="file" class="hidden" (change)="onFileChange($event)">
+      <input name="picture" type="file" class="hidden" (change)="onFileChange($event)">
       <button type="button" (click)="openFileBrowser($event)" class="button button-lg">SELECT</button>
+      <div *ngIf="picture.errors?.required && picture.touched" class="alert">
+        BIRTH를 입력하세요!
+      </div>
     </div>
     <div>
       <img [src]="url" height="200">
@@ -35,6 +69,8 @@
       <button type="button" class="button button-lg" (click)="back()">CANCEL</button>
     </div>
   </form>
-  <pre>{{ memberForm.value | json }}</pre>
-  <pre>{{ memberForm.status }}</pre>
+  <div>
+    <pre>{{ memberForm.value | json }}</pre>
+    <pre>{{ memberForm.status }}</pre>
+  </div>
 </section>
