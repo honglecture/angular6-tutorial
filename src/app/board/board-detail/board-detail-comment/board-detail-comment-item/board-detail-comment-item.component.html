@@ -1,0 +1,8 @@
+<section id="comment-item">
+  <h1>CommentItem</h1>
+  <div class="comment">
+    <div>{{comment.content}}</div>
+    <span>{{comment.writer}} | {{comment.regDate}}</span>
+    <button *ngIf="showButton()" (click)="delete()">삭제</button>
+  </div>
+</section>

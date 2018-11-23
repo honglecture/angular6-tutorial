@@ -7,6 +7,7 @@ import { BoardRegComponent } from './board-reg/board-reg.component';
 import { BoardUpdateComponent } from './board-update/board-update.component';
 import { BoardListResolverService } from './services/board-list-resolver.service';
 import { BoardDetailResolverService } from './services/board-detail-resolver.service';
+import { BoardUpdateResolverService } from './services/board-update-resolver.service';
 
 const routes: Routes = [
   {path: 'board', component: BoardComponent, children:[
@@ -14,13 +15,13 @@ const routes: Routes = [
     {path: 'list', component: BoardListComponent, resolve:{list: BoardListResolverService}},
     {path: 'detail/:id', component: BoardDetailComponent, resolve:{board: BoardDetailResolverService}},
     {path: 'reg', component: BoardRegComponent},
-    {path: 'update', component: BoardUpdateComponent},
+    {path: 'update/:id', component: BoardUpdateComponent, resolve:{board: BoardUpdateResolverService}},
   ]}
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [BoardListResolverService, BoardDetailResolverService]
+  providers: [BoardListResolverService, BoardDetailResolverService, BoardUpdateResolverService]
 })
 export class BoardRoutingModule { }

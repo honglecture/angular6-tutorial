@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Board } from 'src/app/core/models/board.model';
 import { shareReplay, catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
+import { Comment } from 'src/app/core/models/comment.model';
 
 @Injectable()
 export class BoardService {
@@ -31,6 +32,35 @@ export class BoardService {
     .pipe(shareReplay(),catchError(error=>throwError(error)));
   }
 
+  updateBoard(board:Board):Observable<any>{
+    return this.http.put<Board>(`${this.appUrl}/board/update`, board)
+    .pipe(shareReplay(),catchError(error=>throwError(error)));
+  }
+
+  deleteBoard(id:number):Observable<any>{
+    return this.http.delete<any>(`${this.appUrl}/board/delete/${id}`)
+    .pipe(shareReplay(),catchError(error=>throwError(error)));
+  }
+
+  getCommentList(id:number):Observable<Comment[]>{
+    return this.http.get<Comment[]>(`${this.appUrl}/comment/list/${id}`)
+    .pipe(shareReplay(),catchError(error=>throwError(error)));
+  }
+
+  regComment(comment:Comment):Observable<Comment>{
+    return this.http.post<Comment>(`${this.appUrl}/comment/reg`, comment)
+    .pipe(shareReplay(),catchError(error=>throwError(error)));
+  }
+
+  deleteComment(id:number):Observable<any>{
+    return this.http.delete<any>(`${this.appUrl}/comment/delete/${id}`)
+    .pipe(shareReplay(),catchError(error=>throwError(error)));
+  }
+
+
   
+
+  
+
 
 }

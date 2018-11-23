@@ -7,7 +7,9 @@
     <span>{{board.content}}</span>
   </div>
   <div class="content-margin button-group inline-center">
-    <button *ngIf="showEditButton()" type="submit" class="button button-lg">Edit</button>
-    <button type="button" class="button button-lg">Back</button>
+    <button *ngIf="showButton()" type="button" class="button button-lg" routerLink="/board/update/{{board.id}}">Edit</button>
+    <button *ngIf="showButton()" type="button" class="button button-lg" (click)="deleteBoard()">Delete</button>
+    <button type="button" class="button button-lg" routerLink="/board/list">Back</button>
   </div>
 </section>
+<app-board-detail-comment [boardId]="board.id"></app-board-detail-comment>

@@ -1,7 +1,12 @@
 <section class="content-margin">
   <h1>Board List</h1>
-  <app-board-list-item *ngFor="let board of boards" [board]="board"></app-board-list-item>
+  <app-board-list-item *ngFor="let board of boards | paginate: { itemsPerPage: 10, currentPage: p }" 
+  [board]="board">
+</app-board-list-item>
   <div class="content-margin">
-    <button type="button" class="button button-lg" routerLink="../reg">글쓰기</button>
+    <button type="button" class="button button-lg" 
+    [routerLink]="['/board/reg']" [queryParams]= "{ p: p }" queryParamsHandling="merge">
+    글쓰기</button>
   </div>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </section>

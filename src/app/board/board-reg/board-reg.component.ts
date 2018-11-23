@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BoardService } from '../services/board.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Board } from 'src/app/core/models/board.model';
 
 @Component({
@@ -19,10 +19,17 @@ export class BoardRegComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private authService:AuthService,
     private boardService:BoardService,
-    private router: Router) { }
+    private router: Router,
+    private ActivatedRoute:ActivatedRoute) { }
 
   ngOnInit() {
     // this.buildForm();
+    this.ActivatedRoute
+      .queryParams
+      .subscribe(params => {
+        // Defaults to 0 if no query param provided.
+        console.log(params)
+      });
   }
 
   buildForm(){
@@ -47,6 +54,11 @@ export class BoardRegComponent implements OnInit {
         this.router.navigate(['/board/list']);
       }
     )
+  }
+
+  back(){
+    this.router.navigate(['/board/list'], { queryParamsHandling: "merge" });
+
   }
 
   // get title() {

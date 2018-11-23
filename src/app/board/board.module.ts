@@ -11,14 +11,18 @@ import { BoardService } from './services/board.service';
 import { BoardListItemComponent } from './board-list/board-list-item/board-list-item.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BoardDetailCommentComponent } from './board-detail/board-detail-comment/board-detail-comment.component';
+import { BoardDetailCommentItemComponent } from './board-detail/board-detail-comment/board-detail-comment-item/board-detail-comment-item.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
-  declarations: [BoardComponent, BoardListComponent, BoardDetailComponent, BoardRegComponent, BoardUpdateComponent, BoardListItemComponent],
+  declarations: [BoardComponent, BoardListComponent, BoardDetailComponent, BoardRegComponent, BoardUpdateComponent, BoardListItemComponent, BoardDetailCommentComponent, BoardDetailCommentItemComponent],
   imports: [
     CommonModule,
     NgxEditorModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
     /* custom module */
     BoardRoutingModule,
     SharedModule

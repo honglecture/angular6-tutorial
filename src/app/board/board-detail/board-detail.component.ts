@@ -29,7 +29,7 @@ export class BoardDetailComponent implements OnInit {
     );
   }
 
-  showEditButton():boolean{
+  showButton():boolean{
     if(!this.authService.isAuthenticated())
       return false;
     return this.board['writer'] === this.authService.getMemberid();
@@ -38,6 +38,14 @@ export class BoardDetailComponent implements OnInit {
   private getResolvedData(){
     const resolvedData = <{board: Board}>this.route.snapshot.data;
     this.board = resolvedData.board;
+  }
+
+  deleteBoard(){
+    this.boardService.deleteBoard(this.board['id']).subscribe(
+      res=>{
+        this.router.navigate(['/board/list']);
+      }
+    );
   }
 
 }

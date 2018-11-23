@@ -1,0 +1,9 @@
+#comment-item{}
+
+#comment-item .comment{
+    border: 1px solid #000000;
+}
+#comment-item .comment div{
+    width: 100%;
+}
+

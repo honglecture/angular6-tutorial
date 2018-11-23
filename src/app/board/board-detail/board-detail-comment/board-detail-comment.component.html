@@ -1,0 +1,10 @@
+<section id="comment">
+  <h1>Comment</h1>
+  <div class="insert-form">
+    <textarea [(ngModel)]="content"></textarea>
+    <button (click)="reg()">등록</button>
+  </div>
+  <app-board-detail-comment-item *ngFor="let comment of comments" [comment]="comment"
+  (deleteComment)="delete($event)">
+  </app-board-detail-comment-item>
+</section>
